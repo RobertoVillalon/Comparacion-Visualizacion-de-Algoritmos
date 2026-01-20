@@ -22,5 +22,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+    - name: Download lib
+      run: |
+        mkdir -p lib
+        curl -L -o lib/jfreechart-1.5.0.jar https://repo1.maven.org/maven2/org/jfree/jfreechart/1.5.0/jfreechart-1.5.0.jar
     - name: Build with Ant
       run: ant -noinput -buildfile build.xml
