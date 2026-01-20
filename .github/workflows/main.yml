@@ -1,0 +1,31 @@
+name: Build Java JAR (Ant Legacy)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Ant
+        run: sudo apt-get install -y ant
+
+      - name: Build project
+        run: ant clean jar
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-netbeans-jar
+          path: dist/*.jar
