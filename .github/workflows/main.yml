@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup JDK
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -21,11 +21,15 @@ jobs:
       - name: Install Ant
         run: sudo apt-get install -y ant
 
-      - name: Build project
+      - name: List repo for debug
+        run: |
+          ls -R .
+
+      - name: Build with Ant
         run: ant clean jar
 
-      - name: Upload JAR
+      - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: legacy-netbeans-jar
+          name: ProyectoDAA1.jar
           path: dist/*.jar
