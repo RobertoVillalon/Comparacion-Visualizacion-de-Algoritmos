@@ -18,12 +18,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build JAR
-        run: mvn clean package
+      - name: Install Ant
+        run: sudo apt-get install -y ant
+
+      - name: Build with Ant
+        run: ant clean jar
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: target/*.jar
+          files: dist/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
