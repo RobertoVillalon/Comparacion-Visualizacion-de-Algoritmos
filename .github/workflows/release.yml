@@ -22,6 +22,15 @@ jobs:
           java-version: '17'
           cache: maven
 
+      - name: Debug workspace
+        run: |
+          echo "PWD:"
+          pwd
+          echo "Contenido del workspace:"
+          ls -la
+          echo "Buscar pom.xml:"
+          find . -name pom.xml
+   
       - name: Build with Maven
         run: mvn -B clean package
 
